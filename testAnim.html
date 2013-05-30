@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+	.counter {
+		line-height: 1em;
+
+		font-size: 50px;
+		position: relative;
+		background-color: red;
+		overflow: hidden;
+		height: 1em;
+		width: 0.5em;
+	}
+
+	.counterletter {
+		line-height: 1em;
+
+		font-size: 30px;
+		position: relative;
+		background-color: blue;
+		overflow: hidden;
+		height: 1em;
+		width: 1.5em;
+	}
+
+	.digitcontainer
+	{
+	position:relative;
+	z-index: 1;
+	height: 10em;
+	width: 1em;
+	top: -8em;
+
+	/*
+	animation-name: mymove;
+	animation-duration: 5s;
+	animation-timing-function: linear;
+	animation-delay: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-play-state: running;
+	/* Safari and Chrome: */
+	/*-webkit-animation-name: mymove;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-timing-function: ease-in-out;
+	-webkit-animation-delay: 0s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-direction: normal;
+	-webkit-animation-play-state: running;*/
+	/*-webkit-animation:mymove 1s linear 1;*/
+	/*
+	animation:mymove 5s infinite;
+	-webkit-animation:mymove 5s infinite; /* Safari and Chrome */
+	}
+
+	@keyframes mymove
+	{
+	from {top:10em;}
+	to {top:-10em;}
+	}
+
+	@-webkit-keyframes mymove /* Safari and Chrome */
+	{
+
+	0% {top:0em;}
+	100% {top:-9em;}
+	}
+
+	@-webkit-keyframes counterMove /* Safari and Chrome */
+	{
+
+	0% {top:0em;}
+	100% {top:-1em;}
+	}
+
+	.samecolone {
+
+	}
+	.sameline {
+		display: inline-block;
+		position:relative;
+		/*z-index: 1;*/
+		/*height: 10em;*/
+		width: 0.5em;
+		top: -1em;
+
+		-webkit-animation-name: counterMove;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-delay: 0s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-direction: normal;
+	-webkit-animation-play-state: running;
+	}
+
+	.specialcounter {
+			overflow: hidden;
+			height: 1em;
+	}
+</style>
+<!-- <script src="http://code.jquery.com/jquery-2.0.0.js"/> -->
+
+</head>
+<body>
+
+<p><strong>Note:</strong> The @keyframes rule is not supported in Internet Explorer 9 and earlier versions.</p>
+<button onclick="triggerAnim()">Move Me</button>
+<button onclick="triggerAnimCol1()">Move Me</button>
+<button id="addme">add Me</button>
+<div class="vertical">0123456789
+</div>
+
+<div id="mycontainer">
+</div>
+
+<div  class="counterletter">
+	<div id="specialcounter" class="sameline">
+		<div class="samecolone">a
+		</div>
+		<div class="samecolone">b
+		</div>
+	</div>
+	<div class="sameline">
+		<div class="samecolone">c
+		</div>
+		<div class="samecolone">d
+		</div>
+	</div>
+</div>
+
+<div  class="counter">
+
+	<div id="test" class="digitcontainer">
+		<div>0</div>
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+		<div>6</div>
+		<div>7</div>
+		<div>8</div>
+		<div>9</div>
+	</div>
+	<!-- <div class="notsofast">9</div> -->
+</div>
+
+
+<div style="word-wrap: break-word; width:0.5em;">0123456789</div>
+<div  class="counter">
+
+	<div id="test2" class="digitcontainer">
+		<div style="word-wrap: break-word; width:0.5em;">0123456789</div>
+	</div>
+	<!-- <div class="notsofast">9</div> -->
+</div>
+<script src="components/jquery/jquery.js"></script>
+<script>
+
+    	function triggerAnimCol1() {
+		var e = document.getElementById("specialcounter");
+		console.log("we trigger good specialcounter");
+	        if (e.style.webkitAnimationName !== 'counterMove') {
+	            e.style.webkitAnimationName = 'counterMove';
+	            e.style.webkitAnimationDuration = '4s';
+
+	            // make sure to reset the name after 4 seconds, otherwise another call to colorchange wont have any effect
+	            setTimeout(function() {
+	                e.style.webkitAnimationName = '';
+	            }, 4000);
+	        }		
+	}
+
+	function triggerAnim() {
+		var e = document.getElementById("test");
+		console.log("we trigger good");
+	        if (e.style.webkitAnimationName !== 'mymove') {
+	            e.style.webkitAnimationName = 'mymove';
+	            e.style.webkitAnimationDuration = '4s';
+
+	            // make sure to reset the name after 4 seconds, otherwise another call to colorchange wont have any effect
+	            setTimeout(function() {
+	                e.style.webkitAnimationName = '';
+	            }, 4000);
+	        }
+	    }
+
+
+	function addNumber(num, container) {
+		console.log(num);
+		$("<div class='digitcontainer'><div style='word-wrap: break-word; width:0.5em;'>0123456789</div></div>").appendTo($(container));
+
+		return 0;
+	}
+$(document).ready(function() {
+
+	console.log('reead');
+
+});
+console.log('test');
+console.log($('#addme'));
+
+$("#addme").bind('click', function(ev) {
+	addNumber(13422, "#mycontainer");
+});
+	// a.style.top =  '-7em';
+	// setInterval(function(){
+	// 	var a = document.getElementById("test");
+	// 	console.log("doing my best here");
+	// 	console.log(a.style.webkitAnimationName);
+	// 	console.log(a.style);
+	// 	a.style.webkitAnimationDuration = '5s';
+	// 	a.style.webkitAnimationName = 'mymove';
+	// },1000);
+</script>
+</body>
+</html>
+
